@@ -1,21 +1,97 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --cursor-color: #007bff; /* Assuming primary.500 is blue */
+  --transition-duration: 0.3s;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  @apply antialiased;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-base-200;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-primary rounded-full;
+}
+
+/* Custom Utility Classes */
+@layer components {
+  .glass-card {
+    @apply backdrop-blur-lg bg-base-100 bg-opacity-50 
+           border border-base-300 border-opacity-30 
+           shadow-xl rounded-xl 
+           transition-all duration-300;
+  }
+
+  .hover-card {
+    @apply hover:scale-105 hover:shadow-2xl 
+           transition-all duration-300 ease-in-out;
+  }
+
+  .section-padding {
+    @apply py-20 px-4 md:px-8;
+  }
+
+  .gradient-text {
+    @apply bg-clip-text text-transparent 
+           bg-gradient-to-r from-primary to-secondary;
+  }
+}
+
+/* Animation Classes */
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+/* 3D Scene Styles */
+.canvas-container {
+  @apply w-full h-[500px] relative;
+}
+
+/* Form Styles */
+.form-input {
+  @apply input input-bordered w-full 
+         focus:ring-2 focus:ring-primary 
+         transition-all duration-300;
+}
+
+/* Navigation Styles */
+.nav-link {
+  @apply relative hover:text-primary 
+         transition-colors duration-300
+         after:content-[''] after:absolute 
+         after:w-0 after:h-0.5 
+         after:bg-primary after:left-0 
+         after:bottom-0 after:transition-all 
+         hover:after:w-full;
+}
+
+/* Theme Transition */
+.theme-transition {
+  @apply transition-colors duration-300;
 }
